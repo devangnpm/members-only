@@ -10,14 +10,14 @@ async function getAllUsers() {
 }
 
 async function addUserToDB(req, res) {
-  // extract user details received from the signup form via req.body
+  // extract user details received from the signup form via req.body using destructuring
   const { first_name, last_name, username, password } = req.body;
   // wrapping in a try catch block to catch errors if adding the user to DB fails for some reason
   try {
     const hashedpassword = await bcryptjs.hash(password, 10); //hashing out normal password using 10 salt rounds
     // now we add our user with details: first,last and email along with hashedpassword to our DB
-    await db.addUserToDB(first_name,last_name,username,hashedpassword); // adding user to DB via the db query func definded in our queries
-    res.status(201).send("Error creating user");
+    await db.addUserQuery(first_name,last_name,username,hashedpassword); // adding user to DB via the db query func definded in our queries
+    res.status(201).send("User created successfully"); // send 201 success if no errors while creating user
   } catch (error) {
     console.log("Error adding user to database", error);
     res.status(500).send("Error creationg user");

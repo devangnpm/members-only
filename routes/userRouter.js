@@ -5,7 +5,7 @@ const {getAllUsers , addUserToDB} = require("../controllers/userController");
 const userRouter = express.Router();
 
 // This route will get all the users in our DB
-userRouter.get("/", getAllUsers);
+userRouter.get("/", (req,res) => res.send('<h1>This is the Index page bruh<h1/>'));
 // This route will post details to our DB and do it via our userController logic
 userRouter.post("/signup", addUserToDB);
 
