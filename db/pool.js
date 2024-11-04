@@ -7,5 +7,6 @@ module.exports = new Pool({
     user: process.env.DATABASE_USER,
     host: process.env.DATABASE_HOST,
     database: process.env.DATABASE_NAME,
-    port: process.env.DATABASE_PORT
+    port: process.env.DATABASE_PORT,
+    password: process.env.DB_PASSWORD,
 });

@@ -7,10 +7,10 @@ async function getAllUsersQuery() {
 }
 
 // Function to insert a new user into the database
-async function addUserQuery(first_name, last_name, username, hashedpassword) {
+async function addUserQuery(first_name, last_name, username, hashed_password) {
     await pool.query(
-        'INSERT INTO users (first_name, last_name, username, hashedpassword) VALUES ($1, $2, $3, $4)',
-        [first_name, last_name, username, hashedpassword]
+        'INSERT INTO users (first_name, last_name, username, hashed_password) VALUES ($1, $2, $3, $4)',
+        [first_name, last_name, username, hashed_password]
     );
 }
 
