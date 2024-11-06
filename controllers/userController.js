@@ -9,6 +9,16 @@ async function getAllUsers() {
   return users;
 }
 
+async function checkUserExists(username) {
+  const user = await db.getUser(username);
+  return user;
+}
+
+async function getUserId(user_id) {
+  const user = await db.getUserById(user_id); // Call the db query function
+  return user;
+}
+
 async function addUserToDB(req, res) {
   // extract user details received from the signup form via req.body using destructuring
   const { first_name, last_name, username, password } = req.body;
@@ -25,4 +35,5 @@ async function addUserToDB(req, res) {
   }
 }
 
-module.exports = { getAllUsers, addUserToDB };
+
+module.exports = { getAllUsers, addUserToDB,checkUserExists, getUserId };
