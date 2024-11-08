@@ -21,13 +21,14 @@ async function getUserId(user_id) {
 
 async function addUserToDB(req, res) {
   // extract user details received from the signup form via req.body using destructuring
-  const { first_name, last_name, username, password } = req.body;
-  console.log(first_name);
+  const { first_name, last_name, username, password, isAdmin } = req.body;
+  console.log(`this is the checkbox value : ${isAdmin}`);
   // wrapping in a try catch block to catch errors if adding the user to DB fails for some reason
   try {
+    const admin = isAdmin === 'true';
     const hashed_password = await bcryptjs.hash(password, 10); //hashing out normal password using 10 salt rounds
     // now we add our user with details: first,last and email along with hashedpassword to our DB
-    await db.addUserQuery(first_name, last_name, username, hashed_password); // adding user to DB via the db query func definded in our queries
+    await db.addUserQuery(first_name, last_name, username, hashed_password, admin); // adding user to DB via the db query func definded in our queries
     res.status(201).send("User created successfully"); // send 201 success if no errors while creating user
   } catch (error) {
     console.log("Error adding user to database", error);

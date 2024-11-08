@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
+    <div class="card-body text-center">
+      <h1 class="card-title">Welcome, <%= user.username %>!</h1>
+      <p class="card-text">You have successfully logged in.</p>
+      <a href="/logout" class="btn btn-danger btn-sm mt-3">Logout</a>
+      <hr>
+      <a href="/login/secretclub" class="btn btn-primary btn-sm">Join the Secret Club</a>
+      
+      <!-- Conditionally show "Create a New Message" link if user is logged in -->
+      <% if (user) { %>
+        <a href="#" id="createMessageLink" class="btn btn-secondary btn-sm mt-3">Create a New Message</a>
+      <% } %>
+      
+      <!-- New Message Form (hidden by default) -->
+      <div id="newMessageForm" class="mt-3" style="display: none;">
+        <h5>Create a New Message</h5>
+        <form action="/messages" method="POST">
+          <div class="mb-3">
+            <input type="text" name="messageTitle" class="form-control" placeholder="Message Title" required>
+          </div>
+          <div class="mb-3">
+            <textarea name="messageContent" class="form-control" rows="3" placeholder="Enter your message here" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success btn-sm">Submit Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap JavaScript Bundle with Popper -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- JavaScript to toggle message form display -->
+  <script>
+    const createMessageLink = document.getElementById('createMessageLink');
+    const newMessageForm = document.getElementById('newMessageForm');
+    
+    if (createMessageLink) {
+      createMessageLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        newMessageForm.style.display = newMessageForm.style.display === 'none' ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
