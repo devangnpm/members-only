@@ -9,6 +9,10 @@ async function getAllUsers() {
   return users;
 }
 
+async function addUserMessages(user_id, title,text) {
+  await db.insertMessage(user_id, title, text);
+}
+
 async function checkUserExists(username) {
   const user = await db.getUser(username);
   return user;
@@ -37,4 +41,4 @@ async function addUserToDB(req, res) {
 }
 
 
-module.exports = { getAllUsers, addUserToDB,checkUserExists, getUserId };
+module.exports = { getAllUsers, addUserToDB,checkUserExists, getUserId, addUserMessages };
